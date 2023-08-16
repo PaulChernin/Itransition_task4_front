@@ -3,6 +3,7 @@ import { Button, Form, Stack } from "react-bootstrap"
 import BsInput from "../../ui/BsInput"
 import api from "./api/signupApi"
 import { useNavigate } from "react-router-dom"
+import { AxiosError } from "axios"
 
 const SignupPage = () => {
     const navigate = useNavigate()
@@ -12,13 +13,21 @@ const SignupPage = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
+    const handleSignupError = (error: any) => {
+        let message
+        if (error instanceof AxiosError) {
+            message = error.response?.data
+        }
+        setError(message || 'Something went wrong')
+    }
+
     const signup = async () => {
         setError('')
         try {
             await api.signup({name, mail, password})
             navigate('/users')
         } catch (e) {
-            setError('Cannot sign up')
+            handleSignupError(e)
         }
     }
 
