@@ -4,6 +4,7 @@ import BsInput from "../../ui/BsInput"
 import api from "./api/signupApi"
 import { useNavigate } from "react-router-dom"
 import { AxiosError } from "axios"
+import HomeButton from "../../ui/HomeButton"
 
 const SignupPage = () => {
     const navigate = useNavigate()
@@ -32,6 +33,7 @@ const SignupPage = () => {
     }
 
     return <Stack gap={2} style={{maxWidth: '600px'}}>
+        <HomeButton label='Back'/>
         <Form.Group>
             <BsInput
                 label='Name'

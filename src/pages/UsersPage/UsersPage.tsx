@@ -3,9 +3,10 @@ import UsersTable from "./components/UsersTable"
 import UsersControls from "./components/UsersControls"
 import userApi from "./api/userApi"
 import { User } from "./types/user"
-import { Button, Stack } from "react-bootstrap"
+import { Stack } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { AxiosError } from "axios"
+import HomeButton from "../../ui/HomeButton"
 
 const UsersPage = () => {
     const navigate = useNavigate()
@@ -43,12 +44,7 @@ const UsersPage = () => {
     }
     
     return <Stack gap={4}>
-        <Button
-            onClick={() => navigate('/')}
-            style={{width: 'fit-content'}}
-        >
-            Log out
-        </Button>
+        <HomeButton label='Log out' />
         <UsersControls
             block={block}
             unblock={unblock}

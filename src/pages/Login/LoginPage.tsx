@@ -3,6 +3,7 @@ import { Button, Form, Stack } from "react-bootstrap"
 import BsInput from "../../ui/BsInput"
 import api from "./api/loginApi"
 import { useNavigate } from "react-router-dom"
+import HomeButton from "../../ui/HomeButton"
 
 const LoginPage = () => {
     const navigate = useNavigate()
@@ -22,6 +23,7 @@ const LoginPage = () => {
     }
 
     return <Stack gap={2} style={{maxWidth: '600px'}}>
+        <HomeButton label='Back'/>
         <Form.Group>
             <BsInput
                 label='Mail'
@@ -35,7 +37,11 @@ const LoginPage = () => {
                 value={password}
                 setValue={setPassword}
             />
-            <Button onClick={signup} className="mt-4">
+            <Button
+                onClick={signup}
+                className="mt-4"
+                disabled={!mail.trim() || !password}
+            >
                 Log in
             </Button>
         </Form.Group>
