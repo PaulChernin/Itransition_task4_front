@@ -3,7 +3,6 @@ import { Button, Form, Stack } from "react-bootstrap"
 import BsInput from "../../ui/BsInput"
 import api from "./api/signupApi"
 import { useNavigate } from "react-router-dom"
-import { AxiosError } from "axios"
 import HomeButton from "../../ui/HomeButton"
 
 const SignupPage = () => {
@@ -12,24 +11,12 @@ const SignupPage = () => {
     const [name, setName] = useState('')
     const [mail, setMail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-
-    const handleSignupError = (error: any) => {
-        let message
-        if (error instanceof AxiosError) {
-            message = error.response?.data
-        }
-        setError(message || 'Something went wrong')
-    }
 
     const signup = async () => {
-        setError('')
         try {
             await api.signup({name, mail, password})
             navigate('/users')
-        } catch (e) {
-            handleSignupError(e)
-        }
+        } catch (e) {}
     }
 
     return <Stack gap={2} style={{maxWidth: '600px'}}>
@@ -61,7 +48,6 @@ const SignupPage = () => {
                 Sign up
             </Button>
         </Form.Group>
-        <div>{ error }</div>
     </Stack>
 }
 

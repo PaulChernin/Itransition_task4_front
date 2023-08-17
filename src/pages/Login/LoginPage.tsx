@@ -10,16 +10,12 @@ const LoginPage = () => {
 
     const [mail, setMail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
 
     const signup = async () => {
-        setError('')
         try {
             await api.login({mail, password})
             navigate('/users')
-        } catch (e) {
-            setError('Cannot log in')
-        }        
+        } catch (e) {}        
     }
 
     return <Stack gap={2} style={{maxWidth: '600px'}}>
@@ -45,7 +41,6 @@ const LoginPage = () => {
                 Log in
             </Button>
         </Form.Group>
-        <div>{ error }</div>
     </Stack>
 }
 
