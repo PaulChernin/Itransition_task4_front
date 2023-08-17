@@ -28,13 +28,8 @@ const UsersPage = () => {
         getUsers()
     }, [])
 
-    const block = async () => {
-        await userApi.block(selected)
-        getUsers()
-    }
-
-    const unblock = async () => {
-        await userApi.unblock(selected)
+    const setBlocked = async (value: boolean) => {
+        await userApi.setStatus(selected, value)
         getUsers()
     }
     
@@ -46,8 +41,8 @@ const UsersPage = () => {
     return <Stack gap={4}>
         <HomeButton label='Log out' />
         <UsersControls
-            block={block}
-            unblock={unblock}
+            block={() => setBlocked(true)}
+            unblock={() => setBlocked(false)}
             remove={remove}
             disabled={!selected.length}
         />

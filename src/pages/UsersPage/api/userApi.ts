@@ -6,12 +6,11 @@ const getAll = async (): Promise<User[]> => {
     return response.data
 }
 
-const block = async (userIds: number[]): Promise<void> => {
-    await api.post('/protected/users-block', userIds)
-}
-
-const unblock = async (userIds: number[]): Promise<void> => {
-    await api.post('/protected/users-unblock', userIds)
+const setStatus = async (userIds: number[], isBlocked: boolean): Promise<void> => {
+    await api.post('/protected/users-status', {
+        userIds: userIds,
+        isBlocked: isBlocked
+    })
 }
 
 const remove = async (userIds: number[]): Promise<void> => {
@@ -20,7 +19,6 @@ const remove = async (userIds: number[]): Promise<void> => {
 
 export default {
     getAll,
-    block,
-    unblock,
+    setStatus,
     remove
 }
