@@ -10,12 +10,17 @@ const LoginPage = () => {
 
     const [mail, setMail] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const signup = async () => {
+        setIsLoading(true)
         try {
             await api.login({mail, password})
             navigate('/users')
-        } catch (e) {}        
+        } catch (e) {}
+        finally {
+            setIsLoading(false)
+        }    
     }
 
     return <Stack gap={2} style={{maxWidth: '600px'}}>
@@ -36,7 +41,7 @@ const LoginPage = () => {
             <Button
                 onClick={signup}
                 className="mt-4"
-                disabled={!mail.trim() || !password}
+                disabled={!mail.trim() || !password || isLoading}
             >
                 Log in
             </Button>
