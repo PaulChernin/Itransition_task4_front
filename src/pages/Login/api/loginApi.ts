@@ -2,7 +2,8 @@ import { api } from "../../../api"
 import { LoginCredentials } from "../types/LoginCredentials"
 
 const login = async (credentials: LoginCredentials): Promise<void> => {
-    await api.post('/login', credentials)
+    const response = await api.post('/login', credentials)
+    sessionStorage.setItem('token', response.data.token)
 }
 
 export default {
